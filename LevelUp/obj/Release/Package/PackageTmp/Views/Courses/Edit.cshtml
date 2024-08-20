@@ -1,0 +1,66 @@
+﻿@model LevelUp.Models.Course
+
+@{
+    ViewBag.Title = "Edit Course";
+}
+
+<section id="edit-course" class="py-5" style="background-color: #f7f9fc; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card p-5 shadow-sm" style="border-radius: 10px;">
+                    <h2 class="text-center mb-4" style="color: #333; font-size: 2rem; font-weight: 600;">Edit Course</h2>
+                    @using (Html.BeginForm("Edit", "Courses", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group mb-4 text-center">
+                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label", style = "font-weight: 600; color: #555;" })
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control mx-auto", style = "max-width: 100%; border-radius: 5px; padding: 10px;" } })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb-4 d-flex flex-column text-center">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label", style = "font-weight: 600; color: #555;" })
+                            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control mx-auto w-100", style = "max-width: 100% !important; border-radius: 5px; padding: 10px;"} })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb-4 text-center">
+                            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label", style = "font-weight: 600; color: #555;" })
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control mx-auto", style = "max-width: 100%; border-radius: 5px; padding: 10px;" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb-4 text-center">
+                            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label", style = "font-weight: 600; color: #555;" })
+                            @Html.EnumDropDownListFor(model => model.Category, htmlAttributes: new { @class = "form-control mx-auto", style = "max-width: 100%; border-radius: 5px; padding: 10px;" })
+                            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb-4 text-center">
+                            @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label", style = "font-weight: 600; color: #555;" })
+                            @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control mx-auto", style = "max-width: 100%; border-radius: 5px; padding: 10px;" } })
+                            @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                        </div>
+
+                        <input type="hidden" name="creatorId" value="@Model.CreatorId" />
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary" style="background-color: #007bff; border: none; border-radius: 5px; padding: 10px 20px; font-weight: 600; color: #fff;">Save</button>
+                        </div>
+                    }
+
+                    <div class="text-center mt-3">
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary", style = "background-color: #6c757d; border: none; border-radius: 5px; padding: 10px 20px; font-weight: 600; color: #fff;" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<LevelUp.Models.Course>
+
+@{
+    ViewBag.Title = "Courses";
+}
+
+<section id="courses" class="py-5" style="background: linear-gradient(135deg, #e0eafc, #cfdef3);">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color: #333; font-size: 2.5rem; font-weight: 700;">Courses</h2>
+        @if (User.IsInRole("Admin"))
+        {
+            <p class="text-center">
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary", style = "background-color: #007bff; border-color: #007bff;" })
+            </p>
+        }
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100" style="border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
+                        <div class="card-img-container" style="position: relative; overflow: hidden; height: 200px;">
+                            <img src="~/Images/@item.ImageUrl" class="card-img-top" alt="Course Image" style="height: 100%; width: 100%; object-fit: cover; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                        </div>
+                        <div class="card-body" style="padding: 20px; background-color: #fff;">
+                            <h5 class="card-title" style="font-size: 1.5rem; font-weight: 700; color: #333;">@item.Title</h5>
+                            <p class="card-text" style="color: #555;  overflow: hidden;">@item.Description</p>
+                            <p class="card-text" style="font-weight: 700; color: #007bff;"><strong>Price:</strong> $@item.Price</p>
+                            <p class="card-text" style="color: #555;">
+                                <strong>Category:</strong> @item.Category
+                            </p>
+                            <p class="card-text" style="color: #555;">
+                                <strong>Students:</strong> @item.Students.Count
+                            </p>
+                        </div>
+                        <div class="card-footer" style="padding: 10px; background-color: #f8f9fa; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                            <div class="d-flex justify-content-between">
+                                <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-primary" style="background-color: #007bff; border-color: #007bff;">View Details</a>
+                                <a href="@Url.Action("Enroll", new { id = item.Id })" class="btn btn-success" style="background-color: #28a745; border-color: #28a745;">Enroll now</a>
+                                <a href="@Url.Action("AddReview", new { id = item.Id })" class="btn btn-info" style="background-color: #17a2b8; border-color: #17a2b8;">Add Review</a>
+                            </div>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <div class="mt-3 d-flex flex-column">
+                                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-secondary mb-2" style="background-color: #6c757d; border-color: #6c757d;">Edit</a>
+                                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger mb-2" style="background-color: #dc3545; border-color: #dc3545;">Delete</a>
+                                    <a href="@Url.Action("AddLesson", "Courses", new { id = item.Id })" class="btn btn-info" style="background-color: #17a2b8; border-color: #17a2b8;">Add Lesson</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function (card) {
+                card.addEventListener('mouseenter', function () {
+                    card.style.transform = 'scale(1.05)';
+                });
+                card.addEventListener('mouseleave', function () {
+                    card.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+}

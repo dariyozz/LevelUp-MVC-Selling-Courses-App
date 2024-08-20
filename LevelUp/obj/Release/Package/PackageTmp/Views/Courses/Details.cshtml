@@ -1,0 +1,59 @@
+﻿@model LevelUp.Models.Course
+
+@{
+    ViewBag.Title = "Course Details";
+}
+
+<section id="course-details" class="py-5" style="background: linear-gradient(135deg, #e0eafc, #cfdef3);">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color: #333; font-size: 2.5rem; font-weight: 700; background: linear-gradient(to right, #6a11cb, #2575fc); -webkit-background-clip: text; color: transparent;">
+            Course Details
+        </h2>
+        <div class="card mb-3 p-2" style="border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="row no-gutters">
+                <div class="col-md-4 d-flex align-items-center">
+                    <img src="~/Images/@Model.ImageUrl" class="card-img" alt="Course Image" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px; object-fit: cover;;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body" style="padding: 20px; background-color: #fff;">
+                        <h5 class="card-title" style="font-size: 2rem; font-weight: 700; color: #333;">@Model.Title</h5>
+                        <p class="card-text" style="color: #555;">@Model.Description</p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <p class="card-text mr-4" style="font-weight: 700; color: #007bff;"><strong>Price:</strong> $@Model.Price</p>
+                            <p class="card-text mr-4" style="color: #555;"><strong>Category:</strong> @Model.Category</p>
+                        </div>
+                        <div class="d-flex flex-wrap gap-3">
+                            <p class="card-text mr-4" style="color: #555;"><strong>Creator:</strong> @Model.Creator.Name</p>
+                            <p class="card-text mr-4" style="color: #555;"><strong>Email:</strong> @Model.Creator.Email</p>
+                        </div>
+                        <p class="card-text" style="color: #555;"><strong>Students Enrolled:</strong> @Model.Students.Count</p>
+                        <a href="@Url.Action("Index")" class="btn btn-primary mt-3" style="background-color: #007bff; border-color: #007bff;">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-center mb-4" style="font-size: 2rem; font-weight: 700; color: #333;">Course Reviews</h2>
+        @if (Model.Reviews.Any())
+        {
+            <div class="row">
+                @foreach (var review in Model.Reviews)
+                {
+                    <div class="col-md-5 mb-3">
+                        <div class="card p-3" style="border: none; border-radius: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 1.5rem; font-weight: 700; color: #333;">@review.ReviewerName</h5>
+                                <p class="card-text" style="color: #555;">@review.Content</p>
+                                <p class="card-text" style="color: #555;"><strong>Rating:</strong> @review.Rating / 5</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-center">No reviews available for this course.</p>
+        }
+    </div>
+</section>

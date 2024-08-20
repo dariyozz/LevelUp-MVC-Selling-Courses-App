@@ -1,0 +1,26 @@
+﻿@model LevelUp.Models.Lesson
+
+@{
+    ViewBag.Title = "Delete Lesson";
+}
+
+<section id="delete-lesson" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color: #333; font-size: 2.5rem; font-weight: 700;">Delete Lesson</h2>
+        <div class="card mb-3" style="border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="card-body">
+                <h5 class="card-title" style="font-size: 1.5rem; font-weight: 700; color: #333;">@Model.Title</h5>
+                <p class="card-text" style="color: #555;">@Model.Content</p>
+                @using (Html.BeginForm("DeleteLesson", "Courses", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-danger" style="background-color: #dc3545; border-color: #dc3545;">Delete</button>
+                        <a href="@Url.Action("Index")" class="btn btn-secondary ml-2" style="background-color: #6c757d; border-color: #6c757d;">Cancel</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

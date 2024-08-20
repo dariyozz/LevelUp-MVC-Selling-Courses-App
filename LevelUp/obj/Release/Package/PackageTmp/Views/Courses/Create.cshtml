@@ -1,0 +1,72 @@
+﻿@using LevelUp.Models
+@model LevelUp.Models.Course
+
+@{
+    ViewBag.Title = "Create Course";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Create Course</h2>
+                    @using (Html.BeginForm("Create", "Courses", FormMethod.Post, new { @class = "row g-3" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="col-md-12">
+                            <label class="form-label">Title</label>
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label">Description</label>
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Category</label>
+                            @Html.EnumDropDownListFor(model => model.Category, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label">Image URL</label>
+                            @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Creator's Name</label>
+                            @Html.EditorFor(model => model.Creator.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Creator.Name, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Creator's Email</label>
+                            @Html.EditorFor(model => model.Creator.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Creator.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary ms-2" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

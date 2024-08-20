@@ -1,0 +1,98 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - LevelUp</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <style>
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins',"Roboto",sans-serif;
+        }
+
+        body {
+            font-family: 'Roboto',"Poppins",sans-serif;
+        }
+
+        h2, h3, h4, h5 {
+            color: #0d6efd;
+        }
+    </style>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
+        <div class="container w-100">
+            <div class="d-flex justify-content-center align-items-center">
+                @Html.ActionLink("LevelUp", "Index", "Home", null, new { @class = "navbar-brand text-light fw-bold p-2" })
+                <img src="~/Images/rocket-removebg-preview.png" style="width:50px;height:50px;margin-left:-10px;" />
+            </div>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleNavbar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        @Html.ActionLink("About us", "Index", "About", null, new { @class = "text-dark btn btn-light mx-2" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Our Courses", "Index", "Courses", null, new { @class = "text-dark btn btn-light mx-2" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact", "Index", "Contact", null, new { @class = "text-dark btn btn-light mx-2" })
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink(@User.Identity.GetUserName(), "Index", "Home", null, new { @class = "navbar-text text-light ms-4 me-2 btn btn-info fw-bold text-dark " })
+                            <form action="@Url.Action("LogOff", "Account")" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger mx-2">Log out</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Log in", "Login", "Account", null, new { @class = "text-light btn btn-success ms-5 me-2" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Register", "Register", "Account", null, new { @class = "text-light btn btn-primary mx-2" })
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="text-center mt-5 py-2 rounded-5" style="background-color:aliceblue;">
+            <p class="my-2">&copy; @DateTime.Now.Year - Created by <a href="https://github.com/dariyozz" class="text-decoration-none link-dark fw-bold">Dario Jakovleski</a></p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        function toggleNavbar() {
+            var navbar = document.querySelector('.navbar-collapse');
+
+            if (navbar.classList.contains('show')) {
+
+            } else {
+                navbar.classList.add('show');
+            }
+        }
+    </script>
+</body>
+</html>

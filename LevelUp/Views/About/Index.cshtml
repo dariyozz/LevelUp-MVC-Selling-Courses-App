@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<section id="about" class="about-section py-5">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-md-6">
+                <img src="~/Images/2672292-removebg.png" alt="About Us" class="img-fluid rounded">
+            </div>
+            <div class="col-md-5">
+                <h2 class="mb-3">About LevelUp</h2>
+                <p>Welcome to LevelUp, your ultimate destination for online learning. Our mission is to empower individuals to achieve their personal and professional goals through a wide range of high-quality courses taught by industry experts.</p>
+                <p>At LevelUp, we believe that learning should be accessible, engaging, and fun. Whether you want to develop new skills, advance your career, or explore new hobbies, we have the perfect course for you. Our courses are designed to be flexible, so you can learn at your own pace and on your own schedule.</p>
+                <p>We offer a diverse selection of courses in various categories, including technology, business, creative arts, personal development, and more. Each course is crafted to provide you with comprehensive knowledge and practical skills that you can apply immediately.</p>
+                <p>Join our community of learners and start your journey towards success today!</p>
+                <a href="@Url.Action("Index", "Courses")" class="btn btn-primary mt-3 me-2">Explore Our Courses</a>
+                <a href="@Url.Action("Index", "Contact")" class="btn btn-secondary mt-3">Contact Us</a>
+            </div>
+        </div>
+        <div class="row mt-5 ">
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h3>Our Mission</h3>
+                    <p>To provide accessible, high-quality education to individuals around the world, empowering them to achieve their personal and professional goals.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h3>Our Vision</h3>
+                    <p>To be the leading platform for online learning, recognized for our innovative courses, expert instructors, and vibrant learning community.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h3>Our Values</h3>
+                    <p>We value excellence, accessibility, and community. We strive to create a supportive environment where learners can thrive and reach their full potential.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

@@ -1,0 +1,8 @@
+﻿@model string
+@{
+    ViewBag.Title = "SendEmail";
+    string c = @Model.Equals("Your message has been sent successfully.") ? "text-success" : "text-danger";
+}
+
+<div class="@c text-center h5">@Model</div>
+

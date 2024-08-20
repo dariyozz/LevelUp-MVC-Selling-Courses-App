@@ -1,0 +1,61 @@
+﻿@model LevelUp.Models.Review
+
+@{
+    ViewBag.Title = "Add Review";
+}
+
+<section id="add-review" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Add Review</h2>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="card p-4 shadow text-left " >
+                        <input type="hidden" value="@ViewBag.CourseId" name="courseId"/>
+                        @Html.HiddenFor(model => model.CourseId)
+                        <div class="form-group d-flex flex-column justify-content-evenly align-items-center m-3 flex-wrap">
+                            @Html.LabelFor(model => model.ReviewerName, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ReviewerName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReviewerName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group d-flex flex-column justify-content-evenly align-items-center m-3 flex-wrap">
+                            @Html.LabelFor(model => model.ReviewerEmail, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ReviewerEmail, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReviewerEmail, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group d-flex flex-column justify-content-around align-items-center  my-3 flex-wrap ">
+                            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Content, new { @class = "form-control ms-2", rows = 5 })
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger " })
+                        </div>
+
+                        <div class="form-group d-flex flex-column justify-content-evenly align-items-center m-3 flex-wrap">
+                            <label class="control-label">Rating</label>
+                            <select class="form-control" name="Rating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+
+                        <div class="text-center mt-2">
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

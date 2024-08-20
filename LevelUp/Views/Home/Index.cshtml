@@ -1,0 +1,152 @@
+﻿@model IEnumerable<LevelUp.Models.Course>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - My Programming Courses</title>
+    
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-start mt-5 py-5" style="margin-bottom:160px;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div>
+                        <h1 style="font-size:50px;">
+                            Welcome To Your Perfect Learning <span class="text-info">Platform</span>
+                        </h1>
+                        <p class="mt-3">Start your journey to becoming a proficient programmer with our <br />comprehensive courses.</p>
+                        <a href="@Url.Action("Index","About")" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="~/Images/LevelUpHeroImg.jpg" class="img-fluid rounded-5" alt="Hero Image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Us Section -->
+    <section id="about" class="about-section py-5  px-3 rounded-5" style="background-color: aliceblue; margin-block:200px;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="ms-lg-5">About Us</h2>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center h-100" style="border: solid 2px black;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Our Tutors</h5>
+                                    <p class="card-text">Meet our experienced tutors who are dedicated to helping you succeed in your programming journey.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center h-100" style="border: solid 2px black;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Affordable Pricing</h5>
+                                    <p class="card-text">We offer competitive pricing options to make learning programming accessible to everyone.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center h-100" style="border: solid 2px black;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Easy Access</h5>
+                                    <p class="card-text">Access our courses anytime, anywhere, and learn at your own pace with our user-friendly platform.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- What We Offer Section -->
+    <section id="offer" class="offer-section py-5 text-center" style="margin-block:250px;">
+        <div class="container">
+            <h2>What We Offer</h2>
+            <p>Explore our range of high-quality courses taught by industry experts. Whether you're looking to advance your career, learn a new skill<br/> or pursue a passion, we have something for everyone.</p>
+        </div>
+    </section>
+
+    <!-- Popular Courses Section -->
+    <section id="popular-courses" class="popular-courses-section py-5 text-center rounded-5" style="margin-block:100px; background-color: aliceblue">
+        <div class="container">
+            <h2 class="mb-5">Popular Courses</h2>
+            <div class="row justify-content-center">
+                @foreach (var course in Model)
+                {
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card p-2"> 
+                            <img src="~/Images/@course.ImageUrl" class="card-img-top" style="height:230px;" alt="Course Image">
+                            <div class="card-body">
+                                <h5 class="card-title">@course.Title</h5>
+                                <p class="card-text">@course.Description</p>
+                                <p class="card-text">Price: $@course.Price</p>
+                                <p class="card-text">Students Enrolled: @course.Students.Count()</p>
+                                <a href="@Url.Action("Enroll", "Courses", new { id = course.Id })" class="btn btn-primary">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+               
+            </div>
+            <a href="@Url.Action("Index","Courses")" class="btn btn-primary my-3 px-5">See all</a>
+        </div>
+    </section>
+
+
+    <!-- Frequently Asked Questions Section -->
+    <section id="faq" class="faq-section py-5">
+        <div class="container text-center">
+            <h1 class="mb-5">Frequently Asked Questions</h1>
+            <div class="accordion" id="faqAccordion">
+                <div class="card text-center">
+                    <div class="card-header" style="background-color:aliceblue">
+                        <h3 class="mb-0 h question rounded-5">
+                            How do I enroll in a course?
+                        </h3>
+                    </div>
+                    <p class="card-body">
+                        To enroll in a course, simply browse our course catalog, select the course you're interested in, and click on the "Enroll Now" button. Follow the prompts to complete the enrollment process, and you'll be on your way to learning new skills!
+                    </p>
+                </div>
+
+                <div class="card text-center">
+                    <div class="card-header" style="background-color:aliceblue">
+                        <h3 class="mb-0 question">
+                            How do I access my enrolled courses?
+                        </h3>
+                    </div>
+                    <p class="card-body">
+                        Once you've enrolled in a course, you can access it anytime by logging into your account and navigating to the "My Courses" section. From there, you'll see a list of all the courses you're enrolled in, and you can start learning right away!
+                    </p>
+                </div>
+
+                <div class="card text-center">
+                    <div class="card-header" style="background-color:aliceblue">
+                        <h3 class="mb-0 question">
+                            Can I access the course materials offline?
+                        </h3>
+                    </div>
+                    <p class="card-body">
+                        Yes, you can access the course materials offline by downloading them to your device. Most of our courses offer downloadable resources such as lecture notes, presentations, and additional reading materials.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+</html>
